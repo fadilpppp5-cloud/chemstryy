@@ -94,30 +94,28 @@ button{
 
 <script>
 const questions=[
- {q:"de Broglie wavelength depends on",o:["Charge","Mass & velocity","Spin","Energy"],a:2},
- {q:"Bohr model valid for",o:["All atoms","Lithium atom","Hydrogen atom","Ions"],a:3},
- {q:"Rydberg equation gives",o:["Energy","Radius","Wavenumber","Mass"],a:3},
- {q:"Shape of orbital depends on",o:["n","l","m","s"],a:2},
- {q:"Spin quantum number values",o:["0,1","2,3","+1","±1/2"],a:4},
- {q:"Dual nature proposed by",o:["Bohr","Einstein","de Broglie","Rutherford"],a:3},
- {q:"Orientation of electron depends on",o:["n","l","m","s"],a:4},
- {q:"Max electrons in p-subshell",o:["2","6","8","10"],a:2},
- {q:"Hydrogen spectrum visible region",o:["Bracket","Lyman","Balmer","Pfund"],a:3},
- {q:"No two electrons have same 4 quantum numbers",o:["Aufbau","Heisenberg","Pauli exclusion","Hunds rule"],a:3}
+ {q:"de Broglie wavelength depends on",o:["Charge","Mass & velocity","Spin","Energy"],a:1},
+ {q:"Bohr model valid for",o:["All atoms","Lithium atom","Hydrogen atom","Ions"],a:2},
+ {q:"Rydberg equation gives",o:["Energy","Radius","Wavenumber","Mass"],a:2},
+ {q:"Shape of orbital depends on",o:["n","l","m","s"],a:1},
+ {q:"Spin quantum number values",o:["0,1","2,3","+1","±1/2"],a:3},
+ {q:"Dual nature proposed by",o:["Bohr","Einstein","de Broglie","Rutherford"],a:2},
+ {q:"Orientation of electron depends on",o:["n","l","m","s"],a:2},
+ {q:"Max electrons in p-subshell",o:["2","6","8","10"],a:1},
+ {q:"Hydrogen spectrum visible region",o:["Bracket","Lyman","Balmer","Pfund"],a:2},
+ {q:"No two electrons have same 4 quantum numbers",o:["Aufbau","Heisenberg","Pauli exclusion","Hunds rule"],a:2}
 ];
 
 let answers=new Array(10).fill(null);
 let userName="";
 
-/* PASSWORD CHECK — FIXED */
 function checkPass(){
-  const entered = document.getElementById("pass").value.trim();
-  const error = document.getElementById("err");
-
-  if(entered === "322"){
+  const entered=document.getElementById("pass").value.trim();
+  const error=document.getElementById("err");
+  if(entered==="322"){
     error.innerText="";
-    document.getElementById("lock").classList.add("hidden");
-    document.getElementById("nameBox").classList.remove("hidden");
+    lock.classList.add("hidden");
+    nameBox.classList.remove("hidden");
   }else{
     error.innerText="Wrong password 😁 try again";
   }
@@ -183,5 +181,3 @@ function goPoetry(){
 
 </body>
 </html>
-
-
