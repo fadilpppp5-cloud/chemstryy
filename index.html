@@ -26,7 +26,6 @@ h1{color:#ff4d88;}
   margin:8px 0;
   padding:12px;
   border-radius:12px;
-  cursor:pointer;
 }
 .option.selected{border:3px solid #ff4d88;}
 .correct{background:#b7f7c2;}
@@ -100,29 +99,31 @@ const questions=[
  {q:"Shape of orbital depends on",o:["n","l","m","s"],a:1},
  {q:"Spin quantum number values",o:["0,1","2,3","+1","±1/2"],a:3},
  {q:"Dual nature proposed by",o:["Bohr","Einstein","de Broglie","Rutherford"],a:2},
- {q:"Orientation of electron depends on",o:["n","l","m","s"],a:2},
+ {q:"Orientation of electron depends on",o:["n","l","m","s"],a:3},
  {q:"Max electrons in p-subshell",o:["2","6","8","10"],a:1},
  {q:"Hydrogen spectrum visible region",o:["Bracket","Lyman","Balmer","Pfund"],a:2},
  {q:"No two electrons have same 4 quantum numbers",o:["Aufbau","Heisenberg","Pauli exclusion","Hunds rule"],a:2}
 ];
 
-let answers=new Array(10).fill(null);
-let userName="";
+let answers = new Array(10).fill(null);
+let userName = "";
 
+/* PASSWORD */
 function checkPass(){
-  const entered=document.getElementById("pass").value.trim();
-  const error=document.getElementById("err");
-  if(entered==="322"){
+  const entered = document.getElementById("pass").value.trim();
+  const error = document.getElementById("err");
+
+  if(entered === "322"){
     error.innerText="";
     lock.classList.add("hidden");
     nameBox.classList.remove("hidden");
   }else{
-    error.innerText="Wrong password 😁 try again";
+    error.innerText="Wrong password 😁";
   }
 }
 
 function start(){
-  userName=document.getElementById("name").value || "My Love";
+  userName = document.getElementById("name").value || "My Love";
   nameBox.classList.add("hidden");
   quizBox.classList.remove("hidden");
   renderQuiz();
@@ -135,7 +136,7 @@ function select(q,i){
 }
 
 function renderQuiz(){
-  let html=`<h1>vaveeeee 🤭😘 mmwaaaaa ${userName} 💗</h1>`;
+  let html=`<h1>vaveeeee 🤭😘 ${userName} 💗</h1>`;
   questions.forEach((x,q)=>{
     html+=`<p>${q+1}. ${x.q}</p>`;
     x.o.forEach((op,i)=>{
@@ -146,31 +147,44 @@ function renderQuiz(){
   quizBox.innerHTML=html;
 }
 
+/* ✅ FIXED RESULT LOGIC */
 function submit(){
-  let score=0;
+  let score = 0;
   quizBox.classList.add("hidden");
   resultBox.classList.remove("hidden");
 
-  let html=`<h1>Result 💖</h1>`;
-  questions.forEach((x,q)=>{
-    html+=`<p>${q+1}. ${x.q}</p>`;
-    x.o.forEach((op,i)=>{
-      let cls="";
-      if(i===x.a) cls="correct";
-      if(answers[q]===i && i!==x.a) cls="wrong";
-      html+=`<div class="option ${cls}">${op}</div>`;
+  let html = `<h1>Result 💖</h1>`;
+
+  questions.forEach((x, q) => {
+    html += `<p>${q+1}. ${x.q}</p>`;
+
+    x.o.forEach((op, i) => {
+      let cls = "";
+
+      if (answers[q] === i) {
+        if (i === x.a) cls = "correct";
+        else cls = "wrong";
+      }
+
+      if (answers[q] !== x.a && i === x.a) {
+        cls = "correct";
+      }
+
+      html += `<div class="option ${cls}">${op}</div>`;
     });
-    if(answers[q]===x.a) score++;
+
+    if (answers[q] === x.a) score++;
   });
 
-  document.getElementById("music").play();
+  music.play();
 
-  html+=`
+  html += `
     <h2>Score: ${score}/10</h2>
     <p>${score>=6?"So proud of you 🤭😘":"Still cute even wrong 😁🤭😘🥺"}</p>
     <button onclick="goPoetry()">Done ➡️</button>
   `;
-  resultBox.innerHTML=html;
+
+  resultBox.innerHTML = html;
 }
 
 function goPoetry(){
